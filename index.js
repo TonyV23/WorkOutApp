@@ -20,16 +20,43 @@ class Exercise{
 // this Object contain all project's functions 
 const Utils = {
 
+    contentPage : function(title, content, btn){
+        document.querySelector("h1").innerHTML = title;
+        main.innerHTML =content;
+        document.querySelector(".btn-container").innerHTML = btn
+    }
 }
 
 // this Object contain different page (settings, routine, ended)
 const Page = {
+
+    // start page
     lobby : function(){
-        document.querySelector("h1").innerHTML = 
-        "Settings <i id='reboot' class='fas fa-undo'></i>"
-        main.innerHTML = "Exercises";
-        document.querySelector(".btn-container").innerHTML = 
-        "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
+    
+        Utils.contentPage(
+            "Settings <i id='reboot' class='fas fa-undo'></i>",
+            "Exercises",
+            "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
+        );
+    },
+
+    // routine page
+    routine : function(){
+        Utils.contentPage(
+            "Routine",
+            "Exercises with Chrono", 
+            null
+        )    
+    },
+
+    // finish page
+    finish : function(){
+        Utils.contentPage(
+            "Congratulations It's Over !",
+            "<button id='start'>Restart</button>",
+            "<button id='reboot' class='btn-reboot'>Reset<i class='fas fa-times-circle'></i></button>"
+        )
+        
     }
 }
-Page.lobby();
+Page.finish();
