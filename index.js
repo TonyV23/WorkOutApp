@@ -32,10 +32,23 @@ const Page = {
 
     // start page
     lobby : function(){
-    
+        let mapArray = exerciseArray.map((exo) =>
+            `
+                <li>
+                    <div class="card-header">
+                        <input type="number" id=${exo.pic} min ="1" max="10" value=${exo.minute}>
+                        <span>min</span>
+                    </div>
+                    <img src="./img/${exo.pic}.png">
+                    <i class="fas fa-arrow-alt-circle-left arrow" data-pic=${exo.pic}></i>
+                    <i class="fas fa-times-circle deleteBtn" data-pic=${exo.pic}></i>
+                </li>
+            `
+        ).join("");
+
         Utils.contentPage(
             "Settings <i id='reboot' class='fas fa-undo'></i>",
-            "Exercises",
+            "<ul>"+mapArray+"</ul>",
             "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
         );
     },
@@ -59,4 +72,4 @@ const Page = {
         
     }
 }
-Page.finish();
+Page.lobby();
