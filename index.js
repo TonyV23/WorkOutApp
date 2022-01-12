@@ -1,4 +1,5 @@
 const main = document.querySelector("main");
+
 const basicArray = [
     {pic : 0, minute :1},
     {pic : 1, minute :1},
@@ -11,6 +12,7 @@ const basicArray = [
     {pic : 8, minute :1},
     {pic : 9, minute :1}
 ];
+
 let exerciseArray = [ ]; // this table contains all type of exercises
 
 // Anonymous function that starts itself -------- get stored exercises array
@@ -186,7 +188,8 @@ const Page = {
             "<button id='start'>Restart</button>",
             "<button id='reboot' class='btn-reboot'>Reset<i class='fas fa-times-circle'></i></button>"
         )
-        
+        start.addEventListener("click", () => this.routine());
+        reboot.addEventListener("click", () => this.reboot());
     }
 }
 Page.lobby();
