@@ -17,9 +17,7 @@ button {
   transition: 0.25s;
   box-shadow: -20px 20px 60px #75c2d4, 20px -20px 60px #9fffff;
 }
-button:hover {
-  transform: translateX(4px);
-}
+button:hover {transform: translateX(4px);}
 body {
   background: url(./img/Salar-de-Uyuni-Bolivia-Dry-salt-flats-Travelwithmk.com_.jpg)
     fixed center/cover;
@@ -116,9 +114,7 @@ li i:hover {
   background: white;
   transform: scale(1.03);
 }
-.arrow {
-  margin-right: 4px;
-}
+.arrow {margin-right: 4px;}
 .deleteBtn {
   margin-left: 4px;
 }
@@ -137,9 +133,7 @@ li i:hover {
   border-radius: 16px;
   backdrop-filter: blur(3px);
 }
-#start:hover {
-  background: white;
-}
+#start:hover {background: white;}
 #start i {
   transform: translate(8px, -1px);
   color: #627c85;
@@ -183,11 +177,7 @@ li i:hover {
   color: rgb(85, 84, 84);
   margin-left: 4px;
 }
-@media screen and (max-width: 510px) {
-  li {
-    min-width: 90%;
-  }
-}
+@media screen and (max-width: 510px) {li {min-width: 90%;}}
 @media screen and (min-width: 600px) {
   .exercice-container img {
     max-height: 500px;
