@@ -50,7 +50,7 @@ class Exercise{
                 this.seconds --;
                 this.updateContDown();  // recursive 
             }
-        }, 10);
+        }, 1000);
 
         return (main.innerHTML = `
             <div class="exercice-container">
