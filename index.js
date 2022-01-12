@@ -23,9 +23,22 @@ const Utils = {
     contentPage : function(title, content, btn){
         document.querySelector("h1").innerHTML = title;
         main.innerHTML =content;
-        document.querySelector(".btn-container").innerHTML = btn
+        document.querySelector(".btn-container").innerHTML = btn;
+    },
+
+    handleEventMinutes : function () {
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener("input", (e) => {
+                exerciseArray.map((exo) =>{
+                    if (exo.pic == e.target.id){
+                        exo.minute = parseInt(e.target.value) ; // set a new value from user
+                    }
+                })
+            })
+        });
+
     }
-}
+};
 
 // this Object contain different page (settings, routine, ended)
 const Page = {
@@ -51,6 +64,7 @@ const Page = {
             "<ul>"+mapArray+"</ul>",
             "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
         );
+        Utils.handleEventMinutes();   // function that manages for us minutes
     },
 
     // routine page
