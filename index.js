@@ -23,7 +23,49 @@ let exerciseArray = [ ]; // this table contains all type of exercises
 
 //this class generates exercises
 class Exercise{
+    constructor(){
+        this.index = 0;
+        this.minute = exerciseArray[this.index].minute;
+        this.seconds = 0;
+    }
 
+    updateContDown(){
+        this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
+        setTimeout(() => {
+            if (this.minute === 0 && this.seconds === "00"){
+                this.index ++;
+                this.ring();
+                if (this.index < exerciseArray.length) {
+                    this.minute = exerciseArray[this.index].minute;
+                    this.seconds = 0;
+                    this.updateContDown();
+                }else
+                    return Page.finish();
+
+            }else if(this.seconds === "00"){
+                this.minute --;
+                this.seconds = 59;
+                this.updateContDown();
+            }else{
+                this.seconds --;
+                this.updateContDown();  // recursive 
+            }
+        }, 10);
+
+        return (main.innerHTML = `
+            <div class="exercice-container">
+                <p>${this.minute}:${this.seconds}</p> 
+                <img src="./img/${exerciseArray[this.index].pic}.png"/>
+                <div>${this.index + 1} / ${exerciseArray.length}</div> 
+            </div>
+        `)
+    }
+
+    ring(){
+        const audio = new Audio();
+        audio.src = "ring.mp3";
+        audio.play();
+    }
 }
 
 // this Object contain all project's functions 
@@ -124,13 +166,15 @@ const Page = {
         Utils.handleEventArrow();   // function that manages back's button
         Utils.deleteItem(); // function to delete an item of exercise
         reboot.addEventListener("click", () => Utils.reboot());   // function to reset the page
+        start.addEventListener("click", () =>this.routine()); //function that handle start button
     },
 
     // routine page
     routine : function(){
+        const exercise = new Exercise();
         Utils.contentPage(
             "Routine",
-            "Exercises with Chrono", 
+            exercise.updateContDown(), 
             null
         )    
     },
