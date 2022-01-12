@@ -54,6 +54,21 @@ const Utils = {
                 })
             })
         })
+    },
+
+    deleteItem : function(){
+        document.querySelectorAll(".deleteBtn").forEach(btn => {
+            btn.addEventListener("click", (e)=>{ 
+                let newArray = [];
+                exerciseArray.map((exo) =>{
+                    if (exo.pic != e.target.dataset.pic) {
+                        newArray.push(exo);
+                    }
+                });
+                exerciseArray = newArray;   
+                Page.lobby();   // to update screen after delete operation
+            })
+        })
     }
 };
 
@@ -83,6 +98,7 @@ const Page = {
         );
         Utils.handleEventMinutes();   // function that manages for us minutes
         Utils.handleEventArrow();   // function that manages back's button
+        Utils.deleteItem(); // function to delete an item of exercise
     },
 
     // routine page
