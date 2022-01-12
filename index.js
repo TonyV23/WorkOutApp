@@ -37,6 +37,23 @@ const Utils = {
             })
         });
 
+    },
+
+    handleEventArrow : function(){
+        document.querySelectorAll(".arrow").forEach(arrow =>{
+            arrow.addEventListener("click", (e)=>{
+                // we gonna create a variable position to find the pic's position 
+                let position = 0;
+                exerciseArray.map((exo) => {
+                    if (exo.pic == e.target.dataset.pic && position !==0){
+                        // small structure to change the position of pic
+                        [exerciseArray[position],exerciseArray[position - 1]] = [exerciseArray[position - 1], exerciseArray[position]];
+                        Page.lobby() // to update changes on screen
+                    }else 
+                        position ++;
+                })
+            })
+        })
     }
 };
 
@@ -65,6 +82,7 @@ const Page = {
             "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
         );
         Utils.handleEventMinutes();   // function that manages for us minutes
+        Utils.handleEventArrow();   // function that manages back's button
     },
 
     // routine page
