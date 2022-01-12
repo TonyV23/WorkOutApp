@@ -1,5 +1,5 @@
 const main = document.querySelector("main");
-let exerciseArray = [
+const basicArray = [
     {pic : 0, minute :1},
     {pic : 1, minute :1},
     {pic : 2, minute :1},
@@ -10,7 +10,16 @@ let exerciseArray = [
     {pic : 7, minute :1},
     {pic : 8, minute :1},
     {pic : 9, minute :1}
-]; // this table contains all type of exercises
+];
+let exerciseArray = [ ]; // this table contains all type of exercises
+
+// Anonymous function that starts itself -------- get stored exercises array
+(() =>{
+    if (localStorage.exercises) {
+        exerciseArray = JSON.parse(localStorage.exercises);
+    }else
+        exerciseArray = basicArray;
+})();
 
 //this class generates exercises
 class Exercise{
@@ -32,6 +41,7 @@ const Utils = {
                 exerciseArray.map((exo) =>{
                     if (exo.pic == e.target.id){
                         exo.minute = parseInt(e.target.value) ; // set a new value from user
+                        this.store();
                     }
                 })
             })
@@ -49,6 +59,7 @@ const Utils = {
                         // small structure to change the position of pic
                         [exerciseArray[position],exerciseArray[position - 1]] = [exerciseArray[position - 1], exerciseArray[position]];
                         Page.lobby() // to update changes on screen
+                        this.store();
                     }else 
                         position ++;
                 })
@@ -66,9 +77,21 @@ const Utils = {
                     }
                 });
                 exerciseArray = newArray;   
-                Page.lobby();   // to update screen after delete operation
+                Page.lobby();
+                this.store();   // to update screen after delete operation
             })
         })
+    },
+
+    reboot : function(){
+        exerciseArray = basicArray;
+        Page.lobby();
+        this.store();
+    },
+
+    store : function(){
+        localStorage.exercises = JSON.stringify(exerciseArray);     // allow to create a local storage of an array and save the state of an array
+
     }
 };
 
@@ -96,9 +119,11 @@ const Page = {
             "<ul>"+mapArray+"</ul>",
             "<button id='start'>Get started<i class='far fa-play-circle'></i></button>"
         );
+
         Utils.handleEventMinutes();   // function that manages for us minutes
         Utils.handleEventArrow();   // function that manages back's button
         Utils.deleteItem(); // function to delete an item of exercise
+        reboot.addEventListener("click", () => Utils.reboot());   // function to reset the page
     },
 
     // routine page
